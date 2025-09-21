@@ -1,8 +1,8 @@
 import { useChat } from '@/hooks/useChat';
 import { LoginForm } from '@/components/LoginForm';
-import { ChatRoom } from '@/components/ChatRoom';
+import { AdminPanel } from '@/components/AdminPanel';
 
-const Index = () => {
+const AdminPage = () => {
   const { session, loading } = useChat();
 
   if (loading) {
@@ -16,17 +16,11 @@ const Index = () => {
     );
   }
 
-  if (!session.user && !session.isAdmin) {
+  if (!session.isAdmin) {
     return <LoginForm />;
   }
 
-  if (session.isAdmin) {
-    // Redirect to admin panel
-    window.location.href = '/admin';
-    return null;
-  }
-
-  return <ChatRoom />;
+  return <AdminPanel />;
 };
 
-export default Index;
+export default AdminPage;
